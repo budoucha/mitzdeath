@@ -1,5 +1,3 @@
-let audio_enabled = false;
-
 function preload(){
   mitsu_button_image = loadImage("assets/mitsu_button.png");
   mitsu_sound = loadSound('assets/mitsu.mp3');
@@ -28,7 +26,6 @@ function draw(){
 }
 
 function audioSetup(){
-  audio_enabled = true;
   masterVolume(1.0);
   mitsu_sound.setVolume(1.0);
   mitsu_sound.playMode('restart');
