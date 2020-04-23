@@ -1,9 +1,9 @@
-function preload(){
+preload = () => {
   mitsu_button_image = loadImage("assets/mitsu_button.png");
   mitsu_sound = loadSound('assets/mitsu.mp3');
 }
 
-function setup(){
+setup = () => {
   canvas = createCanvas(mitsu_button_image.width, mitsu_button_image.height);
   canvas.parent('sketch-holder');
   background(0,0);
@@ -20,11 +20,11 @@ function setup(){
   audioSetup();
 }
 
-function draw(){
+draw = () => {
   drawSprites();
 }
 
-function audioSetup(){
+const audioSetup = () => {
   masterVolume(1.0);
   mitsu_sound.setVolume(1.0);
   mitsu_sound.playMode('restart');
