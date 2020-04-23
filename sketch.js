@@ -1,31 +1,38 @@
-preload = () => {
-  mitsu_button_image = loadImage("assets/mitsu_button.png");
-  mitsu_sound = loadSound('assets/mitsu.mp3');
-}
+new p5(
+  p => {
+    let mitsu_button_image;
+    let mitsu_sound;
 
-setup = () => {
-  canvas = createCanvas(mitsu_button_image.width, mitsu_button_image.height);
-  canvas.parent('sketch-holder');
-  background(0,0);
+    p.preload = () => {
+      mitsu_button_image = p.loadImage("assets/mitsu_button.png");
+      mitsu_sound = p.loadSound('assets/mitsu.mp3');
+    }
+  
+    p.setup = () => {
+      p.createCanvas(mitsu_button_image.width, mitsu_button_image.height);
+      p.background(0,0);
+    
+      mitsu_button = p.createSprite(p.width/2, p.height/2);
+      mitsu_button.addImage(mitsu_button_image);
+      mitsu_button.mouseActive = true;
+      mitsu_button.onMousePressed = () => {
+        p.tint(168);
+        mitsu_sound.play();
+      }
+      mitsu_button.onMouseReleased = () => p.noTint();
+    
+      audioSetup();
+    }
 
-  mitsu_button = createSprite(width/2, height/2);
-  mitsu_button.addImage(mitsu_button_image);
-  mitsu_button.mouseActive = true;
-  mitsu_button.onMousePressed = () => {
-    tint(168);
-    mitsu_sound.play();
-  }
-  mitsu_button.onMouseReleased = () => noTint();
+    p.draw = () => {
+      p.drawSprites();
+    }
 
-  audioSetup();
-}
-
-draw = () => {
-  drawSprites();
-}
-
-const audioSetup = () => {
-  masterVolume(1.0);
-  mitsu_sound.setVolume(1.0);
-  mitsu_sound.playMode('restart');
-}
+    const audioSetup = () => {
+      p.masterVolume(1.0);
+      mitsu_sound.setVolume(1.0);
+      mitsu_sound.playMode('restart');
+    }
+  },
+  document.getElementById("mitsu")
+);
